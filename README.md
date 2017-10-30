@@ -11,6 +11,7 @@
 
 ## Reference
 
-### name
- 
-<a href="https://github.com/phillyai"> phillyai's Screen capture tool</a>
+### Project's name
+
+Thanks to <a href="https://github.com/phillyai">phillyai</a>
+- <a href="http://software.naver.com/software/summary.nhn?softwareId=GWS_001768"> Captit </a>
