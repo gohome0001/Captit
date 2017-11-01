@@ -56,7 +56,7 @@ Main에는 '상단 메뉴 항목'들이 있음
 - main UI에 신호를 보내 새롭게 정렬된 data로 refresh 하게 함.
 
 
-### handle 함수
+### handle 함수 (pcap_loop)
 
 - 패킷이 들어오면 pcap에서 호출하는 함수. 해당 데이터에 대해 어떠한 처리를 내릴지 이 함수에서 지정함
 
@@ -70,7 +70,7 @@ Main에는 '상단 메뉴 항목'들이 있음
 
 ### packet data 저장 자료구조
 
-- linked list 사용.
+- linked list + queue 사용.
 
 ### .pcap format으로의 저장 및 로딩 함수
 
@@ -79,7 +79,7 @@ Main에는 '상단 메뉴 항목'들이 있음
 
 ### packet data preview 함수
 
-- 해당하는 packet 에서 preview에 필요한 data들만 가져옴
+- packet 에서 preview에 필요한 data들만 가져옴
 
 - source/destination ip/mac address, protocol, len, 최상위 계층 정보
 
@@ -96,7 +96,7 @@ Main에는 '상단 메뉴 항목'들이 있음
 
 ### 상태 표시 구조체
 
-- 현재 프로그램의 상태를 정보를 담고있는 구조체
+- 현재 프로그램(프로젝트)의 상태를 정보를 담고있는 구조체
     - 정렬된 상태, 받아들인 패킷 수, 캡쳐 버튼 누르고 지나온 시간, data를 담은 자료구조 등
 
 ### 패킷 저장 구조체
@@ -108,14 +108,12 @@ Main에는 '상단 메뉴 항목'들이 있음
 ## 역할분담
 
 - 하경
-    - 전체 코드 틀 짜기, 코드 합치기, 구조체나 자료구조 type 정의
+    - 전체적인 구조/틀 지정
+    - .pcap file 지원 기능 구현
 - 성륜
-    - handle 함수 작성
-- 민범
-    - pcap format으로 저장 및 로딩하는 함수 작성.
-- 성운
-    - packet data 분석 함수 작성
-- 소연
-    - Main ui 작성
-- 연서
-    - 자세한 data view UI 작성.
+    - capture된 data 가공 기능 구현
+        - 세부 프로토콜 field 정보 알아내기 등
+- 민범, 성운
+    - packet capture, handle 기능 구현
+- 소연 + 연서
+    - Main UI 및 Sub UI 구현 및 함수 연동
