@@ -44,12 +44,18 @@ FLAG INFORMATION
 
 */
 
+int load_pcap_format(void* data);
+
+void* get_pcap_format(p_captured_list*); // pcap format으로 변환만 해줌. 저장은 구현해야함.
+
+int capture_live(pcap_options);
+
 typedef struct
 {
     int id;
     void* data;
     void* preview_data;
-}captured_data, p_captured_data*;
+}captured_data, p_captured_data*; // 캡쳐된 정보가 갖고 있어야 하는 정의.
 
 typedef struct
 {
@@ -60,11 +66,19 @@ typedef struct
     protocol_type protocol;
     int len;
     char* prev_str;
-}prev_data, p_prev_data*;
+}prev_data, p_prev_data*; // 미리보기 데이터에 대한 정의
 
 typedef struct
 {
     int index;      // sequence number, 즉 captured data의 id 의 max value. 처음에 무조건 0.
     int status;     // 0이면 아무것도 안하는 상태, 1이면 캡쳐링 중, -1 이면 멈춤 상태
-    int now_index;
+    int now_index;  // 현재 UI 가 다루고 있는 index 번호
 }status;
+
+typedef struct
+{
+    unsigned char flag; // bit 0 for premiscuous mode, bit 1 for monitor mode.
+                        // bit 1이 켜진 상태로 백앤드에서 UI로 넘어갈 때에는 모니터 모드를 지원하지 않는 장비임을 뜻함.
+    char *device;
+
+}pcap_options, p_pcap_options*;
