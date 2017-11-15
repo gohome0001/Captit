@@ -1,3 +1,4 @@
 ﻿  WinMain.cpp
-c:\users\김소연\documents\visual studio 2015\projects\pcapproject\pcapproject\winmain.cpp(76): warning C4101: 'hWndListView': unreferenced local variable
+c:\users\김소연\documents\visual studio 2015\projects\pcapproject\pcapproject\winmain.cpp(89): warning C4101: 'hWndListView': unreferenced local variable
+c:\users\김소연\documents\visual studio 2015\projects\pcapproject\pcapproject\winmain.cpp(127): warning C4101: 'oldFont': unreferenced local variable
   PcapProject.vcxproj -> C:\Users\김소연\documents\visual studio 2015\Projects\PcapProject\Debug\PcapProject.exe
