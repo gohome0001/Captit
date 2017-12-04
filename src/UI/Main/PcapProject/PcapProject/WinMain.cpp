@@ -22,10 +22,15 @@ WNDCLASS WndClass2;
 
 HWND hpop;
 
-void MakeProcListView(HWND hWnd) {
-	LVCOLUMN COL;
-	LVITEM Li;
+LVCOLUMN COL;
+LVITEM Li;
 
+char* get_data(void)
+{
+	return "hello";
+}
+
+void MakeProcListView(HWND hWnd) {
 	hList = CreateWindow(WC_LISTVIEW,NULL,WS_CHILD | WS_VISIBLE | WS_BORDER | LBS_NOTIFY | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL,
 		10, 10, D_WINDOW_WIDTH - 35, D_WINDOW_HEIGHT - 100,hWnd,(HMENU)IDC_LIST,g_hInst,NULL);
 
@@ -74,14 +79,6 @@ void MakeProcListView(HWND hWnd) {
 	Li.stateMask = 0;
 	Li.iSubItem = 0;
 	Li.pszText = 0;
-
-	for (int i = 0; i < 60; i++)
-	{
-		Li.iItem = i;
-		ListView_InsertItem(hList, &Li);
-		ListView_SetItemText(hList, i, 0, (LPWSTR)L"1");
-		ListView_SetItemText(hList, i, 1, (LPWSTR)L"testa");
-	}
 }
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdParam, int nCmdShow)
@@ -125,93 +122,71 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmd
 LRESULT CALLBACK WndProc2(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam) {
 	HDC hDC;
 	HFONT hFont,oldFont;
+	static HWND btn1;
 	switch (iMessage)
 	{
 	case WM_CREATE:
-	{
+		btn1 = CreateWindow(L"button", L"jjhjhjhj", WS_CHILD | WS_VISIBLE |
+			BS_3STATE, 200, 150, 160, 40, hWnd, (HMENU)IDC_BTN1, g_hInst, NULL);
+		return 0;
+	case WM_PAINT:
 		hDC = GetDC(hWnd);
-		SetTextColor(hDC, RGB(255, 255, 255));
-		hFont = CreateFont(150, 0, 0, 0, 0, 0, 0, 0, HANGEUL_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, NULL);
-		MoveToEx(hDC, 30, 50, NULL);
-		LineTo(hDC, 100, 70);
-
-		/*LVCOLUMN COL;
-		LVITEM Li;
-
-		hList2 = CreateWindow(WC_LISTVIEW, NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | LBS_NOTIFY,
-			10, 0, MAX_OPTION_X - 35, MAX_OPTION_Y - 50, hWnd, (HMENU)IDC_LIST2, g_hInst, NULL);
-
-
-		COL.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
-		COL.fmt = LVCFMT_CENTER;
-
-		COL.cx = 200;
-		COL.pszText = L"Network Interface";
-		COL.iSubItem = 0;
-		ListView_InsertColumn(hList2, 0, &COL);
-
-		COL.cx = 150;
-		COL.pszText = L"Premiscuous Mode";
-		COL.iSubItem = 1;
-		ListView_InsertColumn(hList2, 1, &COL);
-
-		COL.cx = 150;
-		COL.pszText = L"Monitor Mode";
-		COL.iSubItem = 2;
-		ListView_InsertColumn(hList2, 2, &COL);
-
-		Li.mask = LVIF_TEXT;
-		Li.state = 0;
-		Li.stateMask = 0;
-		Li.iSubItem = 0;
-		Li.pszText = 0;
-
-
-		Li.iItem = 0;
-		ListView_InsertItem(hList2, &Li);
-		ListView_SetItemText(hList2, 0, 0, (LPWSTR)L"Wi - Fi");
-		ListView_SetItemText(hList2, 0, 2, (LPWSTR)L"-");
-
-
-		Li.iItem = 1;
-		ListView_InsertItem(hList2, &Li);
-		ListView_SetItemText(hList2, 1, 0, (LPWSTR)L"VPN");
-		ListView_SetItemText(hList2, 1, 2, (LPWSTR)L"-");
-
-		Li.iItem = 2;
-		ListView_InsertItem(hList2, &Li);
-		ListView_SetItemText(hList2, 2, 0, (LPWSTR)L"VMWARE");
+		hFont = CreateFont(22, 0, 0, 0, 0, 0, 0, 0, HANGEUL_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, NULL);
 		oldFont = (HFONT)SelectObject(hDC, hFont);
-		b1 = CreateWindow(L"button", L"", WS_CHILD | WS_VISIBLE | BS_CHECKBOX, 275, 25, 11, 11, hWnd, (HMENU)IDC_BTN1, NULL, NULL);
-		b2 = CreateWindow(L"button", L"", WS_CHILD | WS_VISIBLE | BS_CHECKBOX, 275, 41, 11, 11, hWnd, (HMENU)IDC_BTN2, NULL, NULL);
-		b3 = CreateWindow(L"button", L"", WS_CHILD | WS_VISIBLE | BS_CHECKBOX, 275, 58, 11, 11, hWnd, (HMENU)IDC_BTN3, NULL, NULL);
-		b4 = CreateWindow(L"button", L"", WS_CHILD | WS_VISIBLE | BS_CHECKBOX, 430, 58, 11, 11, hWnd, (HMENU)IDC_BTN4, NULL, NULL);
-		DeleteObject(hFont);
-		CheckDlgButton(hWnd, 1, BST_CHECKED);*/
+
+		TextOut(hDC, 10, 13, L"Network Interface", lstrlen(L"Network Interface"));
+		TextOut(hDC, (MAX_OPTION_X / 3)+15, 13, L"Premiscuous Mode", lstrlen(L"Premiscuous Mode"));
+		TextOut(hDC, 2 * (MAX_OPTION_X / 3) + 13, 15, L"Monitor Mode", lstrlen(L"Monitor Mode"));
+
+		MoveToEx(hDC, 7, 45, NULL);
+		LineTo(hDC, MAX_OPTION_X-22, 45);
+
+		MoveToEx(hDC, MAX_OPTION_X/3, 10,NULL);
+		LineTo(hDC, MAX_OPTION_X / 3, 40);
 		
+		MoveToEx(hDC, 2 * (MAX_OPTION_X / 3), 10, NULL);
+		LineTo(hDC, 2 * (MAX_OPTION_X / 3), 40);
+		
+		MoveToEx(hDC, 7, 105, NULL);
+		LineTo(hDC, MAX_OPTION_X - 22, 105);
+
+		MoveToEx(hDC, 7, 165, NULL);
+		LineTo(hDC, MAX_OPTION_X - 22, 165);
+		
+		MoveToEx(hDC, 7, 225, NULL);
+		LineTo(hDC, MAX_OPTION_X - 22, 225);
+
+		TextOut(hDC, 65, 65, L"Wi-Fi", lstrlen(L"Wi-Fi"));
+		TextOut(hDC, 75, 125, L"VPN", lstrlen(L"VPN"));
+		TextOut(hDC, 55, 185, L"VMWARE", lstrlen(L"VMWARE"));
+
+		
+		SelectObject(hDC, oldFont);
 		DeleteObject(hFont);
 		return 0;
-	}
-	
 
 	}
+	
 	return DefWindowProc(hWnd, iMessage, wParam, lParam);
 
 }
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam) {
 	
-	OPENFILENAME Ofn;
+	OPENFILENAME Ofn,Sav;
 	TCHAR sFilePathName[MAX_FILENAME_SIZE];
-	
+	boolean flag=false;
+	char* nam;
 	static TCHAR sfilter[] = L"Every File(*.*)\0*.*\0Text File\0*.txt;*.doc\0";
-	
+	static TCHAR sfilter2[] = L"pcap(*.pcap)\0";
+	LPWSTR ptr;
+	static int lastIndex=0;
 	switch (iMessage) {
 	case WM_CREATE:
 		return 0;
 	case WM_COMMAND:
 		switch (wParam)
 		{
-		case ID_FILE_SAVE:
+		case ID_FILE_SAVE://OPEN
 			memset(&Ofn, 0, sizeof(OPENFILENAME));
 			memset(&sFilePathName, 0, sizeof(MAX_FILENAME_SIZE));
 			Ofn.lStructSize = sizeof(OPENFILENAME);
@@ -230,8 +205,50 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 				MessageBox(hWnd, L"불러오기를 취소하였습니다.", L"불러오기 취소", MB_OKCANCEL);
 			}
 			return 0;
+		case ID_FILE_OPEN:
+			//file save;
+			memset(&Sav, 0, sizeof(OPENFILENAME));
+			memset(&sFilePathName, 0, sizeof(MAX_FILENAME_SIZE));
+			Sav.lStructSize = sizeof(OPENFILENAME);
+			Sav.hwndOwner = hWnd;
+			Sav.lpstrFilter = sfilter2;
+			Sav.lpstrFile = sFilePathName;
+			Sav.nMaxFile = MAX_FILENAME_SIZE;
+			Sav.lpstrInitialDir = L"C:\\";
+			if (GetSaveFileName(&Sav) != 0)
+			{
+				wsprintf(sFilePathName, L"%s 파일 선택", Ofn.lpstrFile);
+				MessageBox(hWnd, sFilePathName, L"저장 선택", MB_OKCANCEL);
+			}
+			else
+			{
+				MessageBox(hWnd, L"저장을 취소하였습니다.", L"저장 취소", MB_OKCANCEL);
+			}
+			return 0;
 		case ID_INFO:
 			ShellExecute(NULL, L"open", L"chrome", L"www.github.com/gohome0001/Captit/blob/master/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD.md", NULL, SW_SHOW);
+			return 0;
+		case ID_CAPTURE_START://capture start
+			for (int i = 0;i<50;i++)
+			{ 				
+				nam = get_data();//data read
+				if (flag)
+					break;
+				wchar_t wtext[20];
+				mbstowcs(wtext, nam, strlen(nam) + 1);//char to lpwstr
+				ptr = wtext;
+				Li.iItem = i;
+				ListView_InsertItem(hList, &Li);
+				ListView_SetItemText(hList, i, 0, ptr);
+				ListView_SetItemText(hList, i, 1, ptr);
+			}
+			return 0;
+		case ID_CAPTURE_RESTART:
+			ListView_DeleteAllItems(hList);
+			SendMessage(hWnd, WM_COMMAND, ID_CAPTURE_START, lParam);
+			return 0;
+		case ID_CAPTURE_STOP:
+			flag = true;
 			return 0;
 		case ID_OPTION:
 			LPCWSTR dd2 = L"Option";
@@ -247,7 +264,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 			WndClass2.style = CS_HREDRAW | CS_VREDRAW;
 			RegisterClass(&WndClass2);
 			hpop = CreateWindow(dd2, dd2, WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE, 500, 200, MAX_OPTION_X, MAX_OPTION_Y, hWnd, 0, hInst, NULL);
-
 			return 0;
 		}
 	case WM_DESTROY:
