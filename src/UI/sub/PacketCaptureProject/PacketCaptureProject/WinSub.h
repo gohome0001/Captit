@@ -91,12 +91,13 @@ LRESULT CALLBACK WndProc3(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		return 0;
 
 	case WM_PAINT:
-
+		
 		wsprintf(str, TEXT("destination ip : %d.%d.%d.%d"), 0, 0, 0, 0);
 		TextOut(hDC, point.x, point.y, str, lstrlen(str));
 		wsprintf(str, TEXT("hex view"));
 		TextOut(hDC, point.x, point.y + 120, str, lstrlen(str));
-
+			
+		// (return된 Hex 값이라 가정하고) 랜덤 60개 16진수 출력
 		for (i = 0; i < 3; i++) {
 			for (j = 0; j < 20; j++) {
 				wsprintf(str, TEXT("%02X"), rand() % 256);
