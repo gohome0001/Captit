@@ -1,4 +1,6 @@
 #pragma once
+#include <windows.h>
+#include <commctrl.h>
 #include <time.h>
 
 HWND hWnd1, hWnd2;
