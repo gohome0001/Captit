@@ -62,7 +62,6 @@ void PopSubWindow(WNDCLASS wClass, HWND hWnd, LPARAM lParam) {
 
 LRESULT CALLBACK WndProc3(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	CPoint point;
 	static RECT rt;
 
 	HDC hDC = GetDC(hWnd);
@@ -74,9 +73,6 @@ LRESULT CALLBACK WndProc3(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_CREATE:
 		GetClientRect(hWnd, &rt);
-		point.x = rt.left;
-		point.y = rt.top;
-		ScreenToClient(hWnd, &point);
 
 		/*MyRegisterClass(hInst);
 		hWnd1 = CreateWindow(L"ChildUp", NULL, WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN, 0, 0, 1000, 300, hWnd, 0, hInst, NULL);
@@ -95,15 +91,15 @@ LRESULT CALLBACK WndProc3(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_PAINT:
 
 		wsprintf(str, TEXT("destination ip : %d.%d.%d.%d"), 0, 0, 0, 0);
-		TextOut(hDC, point.x, point.y, str, lstrlen(str));
+		TextOut(hDC, rt.left, rt.top, str, lstrlen(str));
 		wsprintf(str, TEXT("hex view"));
-		TextOut(hDC, point.x, point.y + 120, str, lstrlen(str));
+		TextOut(hDC, rt.left, rt.top + 120, str, lstrlen(str));
 
-		// (returnµ» Hex ∞™¿Ã∂Û ∞°¡§«œ∞Ì) ∑£¥˝ 60∞≥ 16¡¯ºˆ √‚∑¬
+		// (returnÎêú Hex Í∞íÏù¥Îùº Í∞ÄÏ†ïÌïòÍ≥†) ÎûúÎç§ 60Í∞ú 16ÏßÑÏàò Ï∂úÎ†•
 		for (i = 0; i < 3; i++) {
 			for (j = 0; j < 20; j++) {
 				wsprintf(str, TEXT("%02X"), rand() % 256);
-				TextOut(hDC, point.x + tmp, point.y + 150 + tmp2, str, lstrlen(str));
+				TextOut(hDC, rt.left + tmp, rt.top + 150 + tmp2, str, lstrlen(str));
 				tmp += 45;
 			}
 			tmp = 0;
