@@ -1,10 +1,9 @@
-
 #pragma once
 #include <time.h>
 #include <windows.h>
 #include<commctrl.h>
 HWND hWnd1, hWnd2;
-HINSTANCE hInst;
+HINSTANCE hInst2;
 
 LRESULT CALLBACK WndProc3(HWND, UINT, WPARAM, LPARAM);
 LRESULT CALLBACK WndProc4(HWND, UINT, WPARAM, LPARAM);
@@ -48,14 +47,14 @@ void PopSubWindow(WNDCLASS wClass, HWND hWnd, LPARAM lParam) {
 		wClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
 		wClass.hCursor = LoadCursor(NULL, IDC_ARROW);
 		wClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-		wClass.hInstance = hInst;
+		wClass.hInstance = hInst2;
 		wClass.lpfnWndProc = (WNDPROC)WndProc3;
 		wClass.lpszClassName = str;
 		wClass.lpszMenuName = NULL;
 		wClass.style = CS_HREDRAW | CS_VREDRAW;
 		RegisterClass(&wClass);
 
-		hWnd = CreateWindow(str, str, WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE, 150, 300, 1000, 400, hWnd, 0, hInst, NULL);
+		hWnd = CreateWindow(str, str, WS_POPUPWINDOW | WS_CAPTION | WS_VISIBLE, 150, 300, 1000, 400, hWnd, 0, hInst2, NULL);
 		chk++;
 	}
 }

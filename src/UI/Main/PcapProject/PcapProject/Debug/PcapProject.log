@@ -1,6 +1,6 @@
 ﻿  WinMain.cpp
-c:\users\김소연\desktop\project 모음\captit\src\ui\main\pcapproject\pcapproject\winmain.cpp(86): warning C4101: 'hWndListView': unreferenced local variable
-c:\users\김소연\desktop\project 모음\captit\src\ui\main\pcapproject\pcapproject\winmain.cpp(238): warning C4996: 'mbstowcs': This function or variable may be unsafe. Consider using mbstowcs_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\김소연\desktop\project 모음\captit\src\ui\main\pcapproject\pcapproject\winsub.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+c:\users\김소연\desktop\project 모음\captit\src\ui\main\pcapproject\pcapproject\winmain.cpp(88): warning C4101: 'hWndListView': unreferenced local variable
+c:\users\김소연\desktop\project 모음\captit\src\ui\main\pcapproject\pcapproject\winmain.cpp(250): warning C4996: 'mbstowcs': This function or variable may be unsafe. Consider using mbstowcs_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdlib.h(920): note: see declaration of 'mbstowcs'
-c:\users\김소연\desktop\project 모음\captit\src\ui\main\pcapproject\pcapproject\winmain.cpp(220): warning C4700: uninitialized local variable 'Ofn' used
   PcapProject.vcxproj -> C:\Users\김소연\Desktop\project 모음\Captit\src\UI\Main\PcapProject\Debug\PcapProject.exe

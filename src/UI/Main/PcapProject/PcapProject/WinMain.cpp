@@ -2,7 +2,9 @@
 #include<commctrl.h>
 #include"UserDefine.h"
 #include"resource.h"
+#include"WinSub.h"
 #include<stdio.h>
+
 
 #define MAX_FILENAME_SIZE 100
 #define MAX_OPTION_X 600
@@ -181,12 +183,36 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	static TCHAR sfilter2[] = L"pcap(*.pcap)\0";
 	LPWSTR ptr;
 	static int lastIndex=0;
+	int index;
 	switch (iMessage) {
 	case WM_CREATE:
 		return 0;
+	case WM_NOTIFY:
+		switch (wParam)
+		{
+		case IDC_LIST:
+			switch (((LPNMHDR)lParam)->code)
+			{
+			case NM_CLICK:
+				index = SendMessage(hList, LB_GETCURSEL, 0, 0);
+				PopSubWindow(WndClass2, hWnd, lParam);
+				return 0;
+			
+			}
+			return 0;
+		}
 	case WM_COMMAND:
 		switch (wParam)
 		{
+		/*case IDC_LIST:
+			switch (HIWORD(wParam))
+			{
+			case LBN_DBLCLK:
+				index = SendMessage(hList, LB_GETCURSEL, 0, 0);
+				PopSubWindow(WndClass2, hWnd, lParam);
+				return 0;
+			}
+			return 0;*/
 		case ID_FILE_SAVE://OPEN
 			memset(&Ofn, 0, sizeof(OPENFILENAME));
 			memset(&sFilePathName, 0, sizeof(MAX_FILENAME_SIZE));
