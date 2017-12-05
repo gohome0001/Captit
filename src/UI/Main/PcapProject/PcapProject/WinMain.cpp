@@ -119,6 +119,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmd
 	}
 	return 0;
 }
+
 LRESULT CALLBACK WndProc2(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam) {
 	HDC hDC;
 	HFONT hFont,oldFont;
@@ -195,15 +196,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 			Ofn.lpstrFile = sFilePathName;
 			Ofn.nMaxFile = MAX_FILENAME_SIZE;
 			Ofn.lpstrInitialDir = L"C:\\";
-			if (GetOpenFileName(&Ofn) != 0)
-			{
-				wsprintf(sFilePathName, L"%s 파일 선택", Ofn.lpstrFile);
-				MessageBox(hWnd, sFilePathName, L"불러오기 선택", MB_OKCANCEL);
-			}
-			else
-			{
-				MessageBox(hWnd, L"불러오기를 취소하였습니다.", L"불러오기 취소", MB_OKCANCEL);
-			}
+			GetOpenFileName(&Ofn);
 			return 0;
 		case ID_FILE_OPEN:
 			//file save;
@@ -215,15 +208,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 			Sav.lpstrFile = sFilePathName;
 			Sav.nMaxFile = MAX_FILENAME_SIZE;
 			Sav.lpstrInitialDir = L"C:\\";
-			if (GetSaveFileName(&Sav) != 0)
-			{
-				wsprintf(sFilePathName, L"%s 파일 선택", Ofn.lpstrFile);
-				MessageBox(hWnd, sFilePathName, L"저장 선택", MB_OKCANCEL);
-			}
-			else
-			{
-				MessageBox(hWnd, L"저장을 취소하였습니다.", L"저장 취소", MB_OKCANCEL);
-			}
+			GetSaveFileName(&Sav);
+			
 			return 0;
 		case ID_INFO:
 			ShellExecute(NULL, L"open", L"chrome", L"www.github.com/gohome0001/Captit/blob/master/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD.md", NULL, SW_SHOW);
