@@ -204,15 +204,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	case WM_COMMAND:
 		switch (wParam)
 		{
-		/*case IDC_LIST:
-			switch (HIWORD(wParam))
-			{
-			case LBN_DBLCLK:
-				index = SendMessage(hList, LB_GETCURSEL, 0, 0);
-				PopSubWindow(WndClass2, hWnd, lParam);
-				return 0;
-			}
-			return 0;*/
 		case ID_FILE_SAVE://OPEN
 			memset(&Ofn, 0, sizeof(OPENFILENAME));
 			memset(&sFilePathName, 0, sizeof(MAX_FILENAME_SIZE));
