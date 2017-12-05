@@ -145,9 +145,9 @@
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Sub\PacketCaptureProject\PacketCaptureProject\WinSub.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="UserDefine.h" />
+    <ClInclude Include="WinSub.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PcapProject.rc" />

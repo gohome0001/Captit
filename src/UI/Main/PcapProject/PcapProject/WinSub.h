@@ -1,7 +1,8 @@
+
 #pragma once
 #include <time.h>
-#include <window.h>
-
+#include <windows.h>
+#include<commctrl.h>
 HWND hWnd1, hWnd2;
 HINSTANCE hInst;
 
