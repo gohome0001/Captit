@@ -1,5 +1,5 @@
 #include <windows.h>
-#include <atltypes.h>
+//#include <atltypes.h>
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 LRESULT CALLBACK WndProc2(HWND, UINT, WPARAM, LPARAM);
